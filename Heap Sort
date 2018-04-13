@@ -1,0 +1,32 @@
+堆排序平均时间O(nlogn)，最坏情况时间O(nlogn)
+
+def Max_Heapify(heap,heapsize,root):  
+    ''''' 
+    对一个父节点及其左右孩子节点调整 
+    '''  
+    left = 2*root + 1 #注意此处下标从0开始，下标为1开始时，公式为left = 2*root   
+    right = left + 1  
+    large = root  
+    if left<heapsize and heap[large]<heap[left]:  
+        large = left  
+    if right<heapsize and heap[large]<heap[right]:  
+        large = right  
+    if root!=large:  
+        heap[root],heap[large] = heap[large],heap[root]  
+  
+#堆建立过程自下而上调整每个父节点及左右孩子  
+def Build_heap(heap,heapsize):  
+    for root in range((heapsize-1)//2,-1,-1): #表示求每个父节点位置  
+        Max_Heapify(heap,heapsize,root)  
+ #堆排序  
+def Sort_heap(heap,heapsize,sortsize):  
+    ''''' 
+    heapsize:heap的长度 
+    sortsize：未排序的数据个数 
+    '''  
+    Build_heap(heap,heapsize) #排序前先建立一个最大堆  
+    heap[0],heap[sortsize] =  heap[sortsize],heap[0]   
+    heapsize -= 1 #最大值移到最后一位之后，将其从树中删除  
+    sortsize -= 1 #未排序个数减1  
+    if sortsize!=0:  
+        Sort_heap(heap,heapsize,sortsize)  
