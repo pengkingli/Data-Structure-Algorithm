@@ -1,0 +1,38 @@
+归并排序方法的平均时间为O(nlogn),最坏情况时间O(nlogn)
+
+def merge_sort(a,b):
+    """输入：已排序好的短序列a,b
+       输出：排序好的大序列
+    """
+    p=p1=p2=0
+    c = []
+    while p1<=len(a)-1 and p2<=len(b)-1:
+        if a[p1]<=b[p2]:
+            c.append(a[p1])
+            p  +=1
+            p1 +=1
+        else:
+            c.append(b[p2])
+            p  +=1
+            p2 +=1
+    while p1<= len(a)-1:
+        c.append(a[p1])
+        p1 +=1
+    while p2<= len(b)-1:
+        c.append(b[p2])
+        p2 +=1
+    return c
+    
+
+def merge(lists):
+    """输入：未排序的序列
+       输出：排序好的序列"""
+    if len(lists)<=1:
+        return lists
+    midd = len(lists)//2
+    left  =  merge(lists[:midd])
+    right =  merge(lists[midd:])
+    return merge_sort(left,right)
+    
+    
+    
