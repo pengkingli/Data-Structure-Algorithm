@@ -1,0 +1,18 @@
+快速排序平均时间O(nlogn),最差情况时间(n^2)
+
+def quick_sort(array,left,right):    
+        
+    if left>=right:    
+        return    
+    low = left    
+    high = right  
+    key = array[low]  
+    while low<high:    
+        while low<high and array[high]>key:    
+            high -= 1  
+        array[low],array[high] = array[high],array[low] #从最后一位往前，当遇到一个不满足时，交换顺序，  
+        while low<high and array[low]<=key:    
+            low += 1    
+        array[low],array[high] = array[high],array[low]   
+    quick_sort(array,left,low-1) #排序完成后，low=high  
+    quick_sort(array,high+1,right)#此处需要注意，基数不可再次进入排序，否则会栈溢出 
